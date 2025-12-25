@@ -1,0 +1,63 @@
+package models
+
+import (
+	"time"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
+
+type BaseModel struct {
+	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	CreatedAt time.Time          `bson:"createdAt" json:"createdAt"`
+	UpdatedAt time.Time          `bson:"updatedAt" json:"updatedAt"`
+}
+
+type User struct {
+	BaseModel `bson:",inline"`
+
+	Username     string   `bson:"username" json:"username"`
+	Email        string   `bson:"email" json:"email"`
+	PasswordHash string   `bson:"passwordHash" json:"-"`
+	Teams        []string `bson:"teams" json:"teams"`
+	IsActive     bool     `bson:"isActive" json:"isActive"`
+}
+
+type Team struct {
+	Name    string   `bson:"name" json:"name"`
+	OwnerID string   `bson:"ownerId" json:"ownerId"`
+	Members []string `bson:"members" json:"members"`
+}
+
+type Channel struct {
+	BaseModel `bson:",inline"`
+
+	TeamID    string   `bson:"teamId" json:"teamId"`
+	Name      string   `bson:"name" json:"name"`
+	IsPrivate bool     `bson:"isPrivate" json:"isPrivate"`
+	Members   []string `bson:"members,omitempty" json:"members,omitempty"`
+}
+type Message struct {
+	BaseModel `bson:",inline"`
+
+	ChannelID string `bson:"channelId" json:"channelId"`
+	SenderID  string `bson:"senderId" json:"senderId"`
+	Content   string `bson:"content" json:"content"`
+	Type      string `bson:"type" json:"type"`
+}
+
+type Notification struct {
+	BaseModel `bson:",inline"`
+
+	UserID string `bson:"userId" json:"userId"`
+	Title  string `bson:"title" json:"title"`
+	Body   string `bson:"body" json:"body"`
+	IsRead bool   `bson:"isRead" json:"isRead"`
+}
+
+const (
+	UserCollection         = "users"
+	TeamCollection         = "teams"
+	ChannelCollection      = "channels"
+	MessageCollection      = "message"
+	NotificationCollection = "notification"
+)
