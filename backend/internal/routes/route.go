@@ -10,7 +10,8 @@ func SetupRouter() *gin.Engine {
 	r.Use(gin.Recovery())
 	api := r.Group("/api")
 
-	RegisterPublicRoutes(api)
+	AuthPublicRoute(api)
+	TeamPublicRoute(api)
 
 	return r
 }

@@ -23,6 +23,8 @@ type User struct {
 }
 
 type Team struct {
+	BaseModel `bson:",inline"`
+
 	Name    string   `bson:"name" json:"name"`
 	OwnerID string   `bson:"ownerId" json:"ownerId"`
 	Members []string `bson:"members" json:"members"`
@@ -70,4 +72,7 @@ type RegisterRequest struct {
 type LoginRequest struct {
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required"`
+}
+type CreateTeamRequest struct {
+	Name string `json:"name" binding:"required"`
 }
