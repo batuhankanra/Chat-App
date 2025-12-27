@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/batuhankanra/Chat-App/internal/config"
 	"github.com/batuhankanra/Chat-App/internal/db"
+	"github.com/batuhankanra/Chat-App/internal/routes"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,8 +17,7 @@ func main() {
 	}
 	defer redisCLient.Close()
 
-	r := gin.Default()
-	r.SetTrustedProxies(nil)
+	r := routes.SetupRouter()
 
 	r.Run(":" + cfg.Port)
 
