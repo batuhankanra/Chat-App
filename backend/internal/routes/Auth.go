@@ -9,6 +9,6 @@ func RegisterPublicRoutes(r *gin.RouterGroup) {
 	auth := r.Group("/auth")
 	{
 		auth.POST("/register", handlers.Register)
-		auth.POST("/login")
+		auth.POST("/login", handlers.Login)
 	}
 }
