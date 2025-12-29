@@ -25,9 +25,9 @@ type User struct {
 type Team struct {
 	BaseModel `bson:",inline"`
 
-	Name    string   `bson:"name" json:"name"`
-	OwnerID string   `bson:"ownerId" json:"ownerId"`
-	Members []string `bson:"members" json:"members"`
+	Name    string             `bson:"name" json:"name"`
+	OwnerID primitive.ObjectID `bson:"ownerId" json:"ownerId"`
+	Members []string           `bson:"members" json:"members"`
 }
 
 type Channel struct {
@@ -75,4 +75,7 @@ type LoginRequest struct {
 }
 type CreateTeamRequest struct {
 	Name string `json:"name" binding:"required"`
+}
+type AddTeamMemberRequest struct {
+	UserID string `json:"userId" binding:"required"`
 }

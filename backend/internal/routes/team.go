@@ -7,9 +7,14 @@ import (
 )
 
 func TeamPublicRoute(r *gin.RouterGroup) {
-	auth := r.Group("/teams")
+	team := r.Group("/teams")
 	{
-		auth.GET("/", middleware.JWTAuth(), handlers.GetMyTeams)
-		auth.POST("/", middleware.JWTAuth(), handlers.CreateTeam)
+		team.GET("/", middleware.JWTAuth(), handlers.GetMyTeams)
+		team.POST("/", middleware.JWTAuth(), handlers.CreateTeam)
+		team.PUT("/:teamId", middleware.JWTAuth(), handlers.UpdateTeam)
+		team.DELETE("/:teamId", middleware.JWTAuth(), handlers.DeleteTeam)
+		team.POST("/:teamId/members", middleware.JWTAuth(), handlers.AddTeamMember)
+		team.DELETE("/:teamId/members/:removeId", middleware.JWTAuth(), handlers.RemoveMember)
+
 	}
 }
