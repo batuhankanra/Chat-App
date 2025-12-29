@@ -79,3 +79,9 @@ type CreateTeamRequest struct {
 type AddTeamMemberRequest struct {
 	UserID string `json:"userId" binding:"required"`
 }
+
+type SendMessageRequest struct {
+	ChannelID string `json:"channelId" binding:"required"`
+	Content   string `json:"content" binding:"required"`
+	Type      string `json:"type"`
+}
