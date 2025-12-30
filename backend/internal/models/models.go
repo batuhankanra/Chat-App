@@ -85,3 +85,12 @@ type SendMessageRequest struct {
 	Content   string `json:"content" binding:"required"`
 	Type      string `json:"type"`
 }
+type CreateChannelRequest struct {
+	TeamID    string   `json:"teamId" binding:"required"`
+	Name      string   `json:"name" binding:"required"`
+	IsPrivate bool     `json:"isPrivate"`
+	Members   []string `json:"members"`
+}
+type UpdateChannelRequest struct {
+	Name string `json:"name" binding:"required"`
+}
