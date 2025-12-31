@@ -15,45 +15,45 @@ type BaseModel struct {
 type User struct {
 	BaseModel `bson:",inline"`
 
-	Username     string   `bson:"username" json:"username"`
-	Email        string   `bson:"email" json:"email"`
-	PasswordHash string   `bson:"passwordHash" json:"-"`
-	Teams        []string `bson:"teams" json:"teams"`
-	IsActive     bool     `bson:"isActive" json:"isActive"`
+	Username     string               `bson:"username" json:"username"`
+	Email        string               `bson:"email" json:"email"`
+	PasswordHash string               `bson:"passwordHash" json:"-"`
+	Teams        []primitive.ObjectID `bson:"teams" json:"teams"`
+	IsActive     bool                 `bson:"isActive" json:"isActive"`
 }
 
 type Team struct {
 	BaseModel `bson:",inline"`
 
-	Name    string             `bson:"name" json:"name"`
-	OwnerID primitive.ObjectID `bson:"ownerId" json:"ownerId"`
-	Members []string           `bson:"members" json:"members"`
+	Name    string               `bson:"name" json:"name"`
+	OwnerID primitive.ObjectID   `bson:"ownerId" json:"ownerId"`
+	Members []primitive.ObjectID `bson:"members" json:"members"`
 }
 
 type Channel struct {
 	BaseModel `bson:",inline"`
 
-	TeamID    string   `bson:"teamId" json:"teamId"`
-	Name      string   `bson:"name" json:"name"`
-	IsPrivate bool     `bson:"isPrivate" json:"isPrivate"`
-	Members   []string `bson:"members,omitempty" json:"members,omitempty"`
+	TeamID    primitive.ObjectID   `bson:"teamId" json:"teamId"`
+	Name      string               `bson:"name" json:"name"`
+	IsPrivate bool                 `bson:"isPrivate" json:"isPrivate"`
+	Members   []primitive.ObjectID `bson:"members,omitempty" json:"members,omitempty"`
 }
 type Message struct {
 	BaseModel `bson:",inline"`
 
-	ChannelID string `bson:"channelId" json:"channelId"`
-	SenderID  string `bson:"senderId" json:"senderId"`
-	Content   string `bson:"content" json:"content"`
-	Type      string `bson:"type" json:"type"`
+	ChannelID primitive.ObjectID `bson:"channelId" json:"channelId"`
+	SenderID  primitive.ObjectID `bson:"senderId" json:"senderId"`
+	Content   string             `bson:"content" json:"content"`
+	Type      string             `bson:"type" json:"type"`
 }
 
 type Notification struct {
 	BaseModel `bson:",inline"`
 
-	UserID string `bson:"userId" json:"userId"`
-	Title  string `bson:"title" json:"title"`
-	Body   string `bson:"body" json:"body"`
-	IsRead bool   `bson:"isRead" json:"isRead"`
+	UserID primitive.ObjectID `bson:"userId" json:"userId"`
+	Title  string             `bson:"title" json:"title"`
+	Body   string             `bson:"body" json:"body"`
+	IsRead bool               `bson:"isRead" json:"isRead"`
 }
 
 const (

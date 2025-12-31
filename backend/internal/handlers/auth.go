@@ -11,6 +11,7 @@ import (
 	"github.com/batuhankanra/Chat-App/internal/utils"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func Register(c *gin.Context) {
@@ -29,7 +30,7 @@ func Register(c *gin.Context) {
 		Email:        req.Email,
 		PasswordHash: hash,
 		IsActive:     true,
-		Teams:        []string{},
+		Teams:        []primitive.ObjectID{},
 		BaseModel: models.BaseModel{
 			CreatedAt: time.Now(),
 			UpdatedAt: time.Now(),

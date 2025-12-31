@@ -6,6 +6,7 @@ import (
 
 	"github.com/batuhankanra/Chat-App/internal/models"
 	"github.com/batuhankanra/Chat-App/internal/repository"
+	"github.com/batuhankanra/Chat-App/internal/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,13 +26,23 @@ func CreateChannel(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"msg": "private channel request"})
 		return
 	}
+	objTeamId, err := utils.ToObjectId(req.TeamID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"msg": "server error"})
+		return
+	}
+	objMembers, err := utils.ToObjectIdSlice(req.Members)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"msg": "invalid member id"})
+		return
+	}
 	channel := models.Channel{
-		TeamID: req.TeamID,
+		TeamID: objTeamId,
 		BaseModel: models.BaseModel{
 			CreatedAt: time.Now(),
 			UpdatedAt: time.Now(),
 		},
-		Members:   req.Members,
+		Members:   objMembers,
 		IsPrivate: req.IsPrivate,
 		Name:      req.Name,
 	}

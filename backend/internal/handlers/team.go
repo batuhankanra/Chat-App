@@ -26,7 +26,7 @@ func CreateTeam(ctx *gin.Context) {
 
 		Name:    req.Name,
 		OwnerID: objID,
-		Members: []string{userID},
+		Members: []primitive.ObjectID{},
 		BaseModel: models.BaseModel{
 			CreatedAt: time.Now(),
 			UpdatedAt: time.Now(),
